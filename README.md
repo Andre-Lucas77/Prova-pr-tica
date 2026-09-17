@@ -1,3 +1,19 @@
+# André Lucas - Reserva de Estúdio Fotográfico
+Código: PP-16F6FAK-13L0YNC
+
+Sistema desenvolvido em React + Vite + TypeScript para gerenciamento
+de reservas de um estúdio fotográfico.
+
+## Funcionalidades
+
+- Cadastro de reservas
+- Registro e validação de duração
+- Verificação de conflito de horário
+- Equipamentos adicionais
+- Listagem de reservas
+- Filtro por cliente
+- Ordenação A-Z
+- Interface responsiva
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
