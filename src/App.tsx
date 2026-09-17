@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Reserva } from './types/Reserva'
 import ListaReservas from './components/ListaReservas'
+import FormReserva from './components/FormReserva'
 import './App.css'
 
 function App() {
@@ -63,6 +64,22 @@ function App() {
     }
   ])
 
+function adicionarReserva(novaReserva: Reserva) {
+
+  const existeConflito = reservas.some((reserva) =>
+    reserva.sala === novaReserva.sala &&
+    reserva.data === novaReserva.data &&
+    reserva.horario === novaReserva.horario
+  )
+
+  if (existeConflito) {
+    alert('Já existe uma reserva para essa sala nesse horário!')
+    return
+  }
+
+  setReservas([...reservas, novaReserva])
+}
+
   return (
     <div className="app">
 
@@ -73,6 +90,8 @@ function App() {
 
       <main>
         <h2>Gerenciamento de Reservas</h2>
+
+        <FormReserva adicionarReserva={adicionarReserva} />
 
         <ListaReservas reservas={reservas} />
       </main>

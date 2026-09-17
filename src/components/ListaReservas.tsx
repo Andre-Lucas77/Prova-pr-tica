@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { Reserva } from '../types/Reserva'
 import ReservaCard from './ReservaCard'
 
@@ -6,12 +7,24 @@ interface ListaReservasProps {
 }
 
 function ListaReservas({ reservas }: ListaReservasProps) {
-  return (
+  const [filtro, setFiltro] = useState('')
+  const reservasFiltradas = reservas.filter((reserva) =>
+  reserva.cliente.toLowerCase().includes(filtro.toLowerCase())
+)
+const reservasOrdenadas = [...reservasFiltradas].sort((a, b) =>
+  a.cliente.localeCompare(b.cliente)
+)
+    return (
     <section>
       <h2>Reservas cadastradas</h2>
+      <input
+        type="text"
+        placeholder="Filtrar por cliente..."
+        value={filtro}
+        onChange={(e) => setFiltro(e.target.value)}/>
 
       <div className="lista-reservas">
-        {reservas.map((reserva) => (
+        {reservasOrdenadas.map((reserva) => (
           <ReservaCard
             key={reserva.id}
             reserva={reserva}
