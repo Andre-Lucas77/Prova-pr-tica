@@ -89,3 +89,16 @@ export default defineConfig([
 ])
 
 ```
+## Regras de negócio
+
+- A duração mínima de uma reserva é de 2 horas.
+- O sistema impede conflitos de horário na mesma sala e data.
+- A duração da reserva é considerada na verificação de conflitos.
+- É possível registrar equipamentos adicionais.
+
+## Estrutura do projeto
+
+O sistema utiliza componentes React, props, useState e uma interface
+TypeScript para representar os dados das reservas.
+
+Código individual: PP-16F6FAK-13L0YNC
