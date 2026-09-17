@@ -66,14 +66,30 @@ function App() {
 
 function adicionarReserva(novaReserva: Reserva) {
 
-  const existeConflito = reservas.some((reserva) =>
-    reserva.sala === novaReserva.sala &&
-    reserva.data === novaReserva.data &&
-    reserva.horario === novaReserva.horario
-  )
+  const [novaHora, novoMinuto] = novaReserva.horario.split(':').map(Number)
+
+  const novoInicio = novaHora * 60 + novoMinuto
+  const novoFim = novoInicio + novaReserva.duracao * 60
+
+  const existeConflito = reservas.some((reserva) => {
+
+    if (
+      reserva.sala !== novaReserva.sala ||
+      reserva.data !== novaReserva.data
+    ) {
+      return false
+    }
+
+    const [hora, minuto] = reserva.horario.split(':').map(Number)
+
+    const inicioExistente = hora * 60 + minuto
+    const fimExistente = inicioExistente + reserva.duracao * 60
+
+    return novoInicio < fimExistente && novoFim > inicioExistente
+  })
 
   if (existeConflito) {
-    alert('Já existe uma reserva para essa sala nesse horário!')
+    alert('Conflito de horário! A sala já está reservada nesse período.')
     return
   }
 
